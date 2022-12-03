@@ -4,10 +4,12 @@ import Main from "../../layout/Main/Main";
 import Appointment from "../../pages/Appointment/Appointment/Appointment";
 import AddDoctor from "../../pages/Dashboard/AddDoctor/AddDoctor";
 import AllUsers from "../../pages/Dashboard/AllUsers/AllUsers";
+import Payment from "../../pages/Dashboard/Dashboard/Payment/Payment";
 import ManageDoctors from "../../pages/Dashboard/ManageDoctors/ManageDoctors";
 import MyAppointment from "../../pages/Dashboard/MyAppointment/MyAppointment";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login";
+import DisplayError from "../../pages/Shared/DisplayError/DisplayError";
 import SignUp from "../../pages/SignUp/SignUp";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
@@ -16,6 +18,7 @@ export const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Main></Main>,
+		errorElement: <DisplayError />,
 		children: [
 			{
 				path: "/",
@@ -42,6 +45,7 @@ export const router = createBrowserRouter([
 				<DashboardLayout></DashboardLayout>
 			</PrivateRoute>
 		),
+		errorElement: <DisplayError />,
 		children: [
 			{
 				path: "/dashboard",
@@ -67,9 +71,19 @@ export const router = createBrowserRouter([
 				path: "/dashboard/managedoctors",
 				element: (
 					<AdminRoute>
-						<ManageDoctors/>
+						<ManageDoctors />
 					</AdminRoute>
 				),
+			},
+			{
+				path: "/dashboard/payment/:id",
+				element: (
+					
+						<Payment></Payment>
+					
+				),
+				loader: ({ params }) =>
+					fetch(`https://doctors-protal-server.vercel.app/bookings/${params.id}`),
 			},
 		],
 	},

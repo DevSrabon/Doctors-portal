@@ -43,7 +43,7 @@ const SignUp = () => {
 	};
 	const savedUser = (name, email) => {
 		const user = { name, email };
-		fetch("http://localhost:5000/users", {
+		fetch("https://doctors-protal-server.vercel.app/users", {
 			method: 'POST',
 			headers: {
 				'content-type': 'application/json',
@@ -106,6 +106,7 @@ const SignUp = () => {
 										message: "Password must be six character or longer",
 									},
 									pattern: {
+										
 										value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/,
 										message:
 											"Password must have uppercase, number and special characters",
@@ -115,7 +116,8 @@ const SignUp = () => {
 							{errors.password && (
 								<p className="text-red-600">{errors.password?.message}</p>
 							)}
-						</div>
+					</div>
+					
 						<input
 							className="btn btn-accent w-full mt-3"
 							value="Login"

@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../../contexts/AuthProvider';
 
 const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
-	const { name: treatmentName, slots } = treatment;
+	const { name: treatmentName, slots, price } = treatment;
 	const date = format(selectedDate, "PP");
 
 	const { user } = useContext(AuthContext);
@@ -23,8 +23,9 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
 			slot,
 			email,
 			phone,
+			price
 		};
-		fetch("http://localhost:5000/bookings", {
+		fetch("https://doctors-protal-server-devsrabon.vercel.app/bookings", {
 			method: "POST",
 			headers: {
 				"content-type": "application/json",
@@ -38,8 +39,7 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
 					setTreatment(null);
 					toast.success("Booking Confirm");
 					refetch();
-				}
-				else {
+				} else {
 					toast.error(data.message);
 				}
 			});
@@ -63,7 +63,6 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
 							className="input input-bordered w-full"
 						/>
 						<select name="slot" className="select select-bordered w-full">
-							<option>Who shot first?</option>
 							{slots.map((slot, i) => (
 								<option value={slot} key={i}>
 									{slot}

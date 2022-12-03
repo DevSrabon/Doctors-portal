@@ -17,7 +17,6 @@ const Home = () => {
             <MakeAppointment></MakeAppointment>
             <Testimonial></Testimonial>
             <div className='-mx-5'>
-
             <ContactUs></ContactUs>
             </div>
         </div>
